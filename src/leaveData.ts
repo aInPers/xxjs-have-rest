@@ -1,7 +1,8 @@
-import type { ApprovalItem, LeaveField, LeaveSettings } from "./types";
+import type { ApprovalItem, ApprovalRole, LeaveField, LeaveSettings } from "./types";
 
 export const periodOptions = ["跑操", "第一节", "第二节", "第三节", "第四节", "午休", "第五节", "第六节", "第七节", "晚自习"];
 export const leaveTypeOptions = ["中餐晚餐外出", "事假", "病假", "外出", "其他"];
+export const approvalRoleOptions: ApprovalRole[] = ["家长", "班主任", "学生科", "领导"];
 
 export const defaultLeaveSettings: LeaveSettings = {
   applicant: "张三",
@@ -12,6 +13,8 @@ export const defaultLeaveSettings: LeaveSettings = {
   reason: "吃饭",
   leaveType: "中餐晚餐外出",
   isBoarding: false,
+  proofImages: [],
+  approvalRequests: approvalRoleOptions,
 };
 
 /**
@@ -51,6 +54,7 @@ export function createLeaveFields(settings: LeaveSettings): LeaveField[] {
 }
 
 export const approvals: ApprovalItem[] = [
+  { title: "家长审批", detail: "", status: "approved" },
   { title: "班主任审批", detail: "", status: "approved" },
   { title: "学生科审批", detail: "", status: "pending" },
   { title: "领导审批", detail: "", status: "pending" },

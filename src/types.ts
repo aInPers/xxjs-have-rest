@@ -9,6 +9,8 @@ export interface ApprovalItem {
   status: "approved" | "pending";
 }
 
+export type ApprovalRole = "家长" | "班主任" | "学生科" | "领导";
+
 export interface LeaveSettings {
   applicant: string;
   startDate: string;
@@ -18,4 +20,6 @@ export interface LeaveSettings {
   reason: string;
   leaveType: string;
   isBoarding: boolean;
+  proofImages: string[];
+  approvalRequests: ApprovalRole[];
 }

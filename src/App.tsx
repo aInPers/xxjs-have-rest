@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { approvals, createLeaveFields, defaultLeaveSettings } from "./leaveData";
+import { loadLeaveSettings, saveLeaveSettings } from "./leaveStorage";
 import type { ApprovalItem, LeaveSettings } from "./types";
 import schoolBrand from "../assets/school-brand.webp";
 import closeIcon from "../assets/close.svg";
@@ -13,6 +14,7 @@ import chevronIcon from "../assets/chevron-down.svg";
 import imageIcon from "../assets/image.svg";
 import ChatList from "../page/ChatList";
 import SettingsPage from "../page/SettingsPage";
+import AboutPage from "../page/AboutPage";
 
 /** Renders a titled card that groups a section of the leave detail page. */
 function DetailCard({ icon, title, children }: { icon: string; title: string; children: React.ReactNode }) {
@@ -45,8 +47,28 @@ function ApprovalRole({ item }: { item: ApprovalItem }) {
 function App() {
   const [rolesOpen, setRolesOpen] = useState(false);
   const [backNotice, setBackNotice] = useState(false);
-  const [activePage, setActivePage] = useState<"leave" | "wechat" | "settings">("wechat");
+  const [activePage, setActivePage] = useState<"leave" | "wechat" | "settings" | "about">("wechat");
   const [leaveSettings, setLeaveSettings] = useState<LeaveSettings>(defaultLeaveSettings);
+  const [settingsReady, setSettingsReady] = useState(false);
+  const approvalItems = approvals.map((approval) => ({
+    ...approval,
+    status: leaveSettings.approvalRequests.some((role) => approval.title === `${role}审批`) ? "approved" as const : "pending" as const,
+  }));
+  const parentApproval = approvalItems.find((approval) => approval.title === "家长审批");
+  const anyApprovalItems = approvalItems.filter((approval) => approval.title !== "家长审批");
+  const hasAnyApproval = anyApprovalItems.some((approval) => approval.status === "approved");
+
+  /** Restores the latest leave settings after the local database becomes available. */
+  useEffect(() => {
+    let isMounted = true;
+    loadLeaveSettings().then((savedSettings) => {
+      if (isMounted && savedSettings) setLeaveSettings(savedSettings);
+      if (isMounted) setSettingsReady(true);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   /** Shows an in-page notice in the desktop demonstration when the return action is selected. */
   function handleBack() {
@@ -69,6 +91,11 @@ function App() {
     setActivePage("settings");
   }
 
+  /** Opens the product-information page from the WeChat-style chat list. */
+  function openAbout() {
+    setActivePage("about");
+  }
+
   /**
    * Saves the validated settings form and returns the user to the chat list.
    *
@@ -77,14 +104,19 @@ function App() {
   function saveSettings(settings: LeaveSettings) {
     setLeaveSettings(settings);
     setActivePage("wechat");
+    void saveLeaveSettings(settings);
   }
 
   if (activePage === "wechat") {
-    return <ChatList onOpenLeave={returnToLeave} onOpenSettings={openSettings} />;
+    return <ChatList onOpenLeave={returnToLeave} onOpenSettings={openSettings} onOpenAbout={openAbout} />;
   }
 
   if (activePage === "settings") {
-    return <SettingsPage initialSettings={leaveSettings} onCancel={openWechat} onSave={saveSettings} />;
+    return settingsReady ? <SettingsPage initialSettings={leaveSettings} onCancel={openWechat} onSave={saveSettings} /> : <main className="storage-loading">正在读取本地设置…</main>;
+  }
+
+  if (activePage === "about") {
+    return <AboutPage onBack={openWechat} />;
   }
 
   return (
@@ -110,17 +142,17 @@ function App() {
         </DetailCard>
 
         <DetailCard icon={workflowIcon} title="审批流程">
-          <div className="success-alert"><img src={checkIcon} alt="" /><div><strong>已通过</strong><span>请假申请已通过</span></div></div>
+          <div className={`success-alert ${hasAnyApproval ? "" : "pending-alert"}`}><img src={hasAnyApproval ? checkIcon : pendingIcon} alt="" /><div><strong>{hasAnyApproval ? "已通过" : "待审批"}</strong><span>{hasAnyApproval ? "任一审批人已批准，请假申请已通过" : "等待任一审批人批准"}</span></div></div>
           <div className="timeline">
-            <div className="timeline-item"><i /><div><strong>家长审批</strong><p className="approved"><img src={checkIcon} alt="" />已批准</p><span>需家长确认</span></div></div>
-            <div className="timeline-item"><i /><div className="any-approval"><strong>任一审批</strong><p className="approved"><img src={checkIcon} alt="" />已批准</p><span>任一批准即可</span><div className="roles-box">{approvals.map((item) => <ApprovalRole key={item.title} item={item} />)}</div></div></div>
+            <div className="timeline-item"><i className={parentApproval?.status === "approved" ? "approved-dot" : "pending-dot"} /><div><strong>家长审批</strong><p className={parentApproval?.status === "approved" ? "approved" : "pending"}><img src={parentApproval?.status === "approved" ? checkIcon : pendingIcon} alt="" />{parentApproval?.status === "approved" ? "已批准" : "待审批"}</p><span>需家长确认</span></div></div>
+            <div className="timeline-item"><i className={hasAnyApproval ? "approved-dot" : "pending-dot"} /><div className="any-approval"><strong>任一审批</strong><p className={hasAnyApproval ? "approved" : "pending"}><img src={hasAnyApproval ? checkIcon : pendingIcon} alt="" />{hasAnyApproval ? "已批准" : "待审批"}</p><span>班主任、学生科、领导任一批准即可</span><div className="roles-box">{anyApprovalItems.map((item) => <ApprovalRole key={item.title} item={item} />)}</div></div></div>
           </div>
           <button type="button" className="role-toggle" onClick={() => setRolesOpen(!rolesOpen)}><img className={rolesOpen ? "rotated" : ""} src={chevronIcon} alt="" />{rolesOpen ? "收起无需审批的角色" : "显示无需审批的角色 (1)"}</button>
           {rolesOpen && <div className="unneeded-role">宿舍管理员：无需审批</div>}
         </DetailCard>
 
         <DetailCard icon={imageIcon} title="证明图片">
-          <div className="empty-proof"><img src={imageIcon} alt="" /><span>暂无证明图片</span></div>
+          {leaveSettings.proofImages.length ? <div className="detail-proof-list">{leaveSettings.proofImages.map((image, index) => <img key={image} src={image} alt={`证明图片 ${index + 1}`} />)}</div> : <div className="empty-proof"><img src={imageIcon} alt="" /><span>暂无证明图片</span></div>}
         </DetailCard>
       </div>
       {backNotice && <div className="toast" role="status">已返回请假列表</div>}
