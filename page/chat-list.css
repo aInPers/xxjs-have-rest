@@ -1,0 +1,19 @@
+.wechat-page { width: 100%; min-height: 100vh; padding-bottom: 74px; color: #1d1d1f; background: #f7f7f7; }
+.wechat-header { height: 64px; padding: 0 15px; background: #ededed; border-bottom: 1px solid #dedede; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; }
+.wechat-header h1 { margin: 0; font-size: 18px; font-weight: 600; text-align: center; }
+.wechat-add { height: 42px; border: 0; background: transparent; color: #181818; }
+.wechat-add { font-size: 31px; font-weight: 300; line-height: 1; text-align: right; }
+.chat-list { background: #fff; }
+.chat-row { width: 100%; min-height: 78px; padding: 11px 16px; border: 0; border-bottom: 1px solid #ededed; background: #fff; display: grid; grid-template-columns: 55px 1fr auto; align-items: center; gap: 10px; text-align: left; }
+.chat-row:active { background: #f1f1f1; }
+.chat-row > img { width: 55px; height: 55px; border-radius: 9px; }
+.chat-copy { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.chat-copy strong { color: #1d1d1f; font-size: 17px; font-weight: 500; }
+.chat-copy small { overflow: hidden; color: #969696; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.chat-row time { align-self: start; padding-top: 4px; color: #b4b4b4; font-size: 11px; }
+.wechat-tabs { position: fixed; z-index: 2; bottom: 0; left: 0; width: 100%; height: 64px; border-top: 1px solid #dddddd; background: #f8f8f8; display: grid; grid-template-columns: repeat(4, 1fr); }
+.wechat-tabs span { padding-top: 8px; color: #777; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; }
+.wechat-tabs img { width: 22px; height: 22px; object-fit: contain; opacity: .78; }
+.wechat-tabs .active { color: #07c160; }
+.wechat-tabs .active img { filter: invert(52%) sepia(58%) saturate(1912%) hue-rotate(100deg) brightness(90%) contrast(95%); opacity: 1; }
+.wechat-toast { position: fixed; z-index: 3; left: 50%; bottom: 84px; padding: 10px 17px; color: #fff; border-radius: 5px; background: rgba(0, 0, 0, .72); font-size: 14px; transform: translateX(-50%); }
