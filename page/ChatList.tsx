@@ -7,6 +7,7 @@ import profileTabIcon from "../assets/wechat/contacts.png";
 import discoverTabIcon from "../assets/wechat/discover.png";
 import contactsTabIcon from "../assets/wechat/profile.png";
 import "./chat-list.css";
+import {leave_version} from "./version"
 
 interface ChatListProps {
   onOpenLeave: () => void;
@@ -25,7 +26,7 @@ interface Conversation {
 const conversations: Conversation[] = [
   { icon: leaveIcon, name: "请假", preview: "请假申请已通过", time: "下午 7:28", destination: "leave" },
   { icon: settingsIcon, name: "设置", preview: "配置请假信息", time: "下午 7:26", destination: "settings" },
-  { icon: aboutIcon, name: "关于", preview: "请假系统 · 版本 0.9.1", time: "昨天", destination: "about" },
+  { icon: aboutIcon, name: "关于", preview: "请假系统 · 版本 "+leave_version, time: "昨天", destination: "about" },
 ];
 
 /**
