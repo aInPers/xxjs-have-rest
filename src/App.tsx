@@ -123,7 +123,7 @@ function App() {
     <main className="app-shell">
       <header className="mobile-bar">
         <button type="button" className="icon-button" onClick={openWechat} aria-label="返回微信"><img src={closeIcon} alt="" /></button>
-        <div><strong>请假详情 - 张三</strong><span>qj.gzitvs.com</span></div>
+        <div><strong>请假详情 - {leaveSettings.applicant}</strong><span>qj.gzitvs.com</span></div>
         <button type="button" className="icon-button" aria-label="更多"><img src={moreIcon} alt="" /></button>
       </header>
 

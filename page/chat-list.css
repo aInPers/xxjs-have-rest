@@ -1,5 +1,5 @@
 .wechat-page { width: 100%; min-height: 100vh; padding-bottom: 74px; color: #1d1d1f; background: #f7f7f7; }
-.wechat-header { height: 64px; padding: 0 15px; background: #ededed; border-bottom: 1px solid #dedede; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; }
+.wechat-header { height: 64px; padding: 0 15px; margin-top: 30px; background: #ededed; border-bottom: 1px solid #dedede; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; }
 .wechat-header h1 { margin: 0; font-size: 18px; font-weight: 600; text-align: center; }
 .wechat-add { height: 42px; border: 0; background: transparent; color: #181818; }
 .wechat-add { font-size: 31px; font-weight: 300; line-height: 1; text-align: right; }

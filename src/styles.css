@@ -4,7 +4,7 @@ body { margin: 0; min-width: 320px; background: #f6f7f9; }
 button { font: inherit; cursor: pointer; }
 .storage-loading { min-height: 100vh; color: #777; background: #f6f6f6; display: grid; place-items: center; font-size: 15px; }
 .app-shell { width: 100%; min-height: 100vh; background: #f6f7f9; }
-.mobile-bar { height: 90px; padding: 12px 17px 8px; color: #fff; background: #111; display: flex; align-items: center; justify-content: space-between; }
+.mobile-bar { height: 90px; margin-top: 30px; padding: 12px 17px 8px; color: #fff; background: #111; display: flex; align-items: center; justify-content: space-between; }
 .mobile-bar > div { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .mobile-bar strong { font-size: 20px; font-weight: 600; letter-spacing: .3px; }
 .mobile-bar span { color: #999; font-size: 12px; }

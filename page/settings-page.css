@@ -1,5 +1,5 @@
 .settings-page { min-height: 100vh; color: #191919; background: #f6f6f6; }
-.settings-header { height: 64px; padding: 0 15px; border-bottom: 1px solid #dedede; background: #ededed; display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; }
+.settings-header { height: 64px; margin-top: 30px; padding: 0 15px; border-bottom: 1px solid #dedede; background: #ededed; display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; }
 .settings-header h1 { margin: 0; font-size: 18px; font-weight: 600; text-align: center; }
 .settings-header button { height: 42px; border: 0; background: transparent; color: #171717; }
 .settings-header > button:first-child { font-family: Arial, sans-serif; font-size: 39px; font-weight: 200; line-height: 28px; text-align: left; }
