@@ -22,9 +22,9 @@ h1 img { width: 29px; height: 29px; }
 .card-heading img { width: 23px; height: 23px; }
 .card-heading h2 { margin: 0; font-size: 20px; font-weight: 700; }
 .leave-fields { margin: 17px 0 0; }
-.leave-fields > div { min-height: 48px; display: grid; grid-template-columns: 148px 1fr; align-items: center; font-size: 16px; }
+.leave-fields > div { min-height: 48px; display: grid; grid-template-columns: 148px 1fr; align-items: normal; font-size: 16px; }
 .leave-fields dt { color: #3f4852; font-weight: 600; }
-.leave-fields dd { margin: 0; color: #303840; }
+.leave-fields dd { margin: 0; color: #303840; margin-left: 30px;}
 .success-alert { margin: 21px 0; padding: 18px 21px; border: 2px solid #18b98d; border-radius: 9px; background: #c9f7e3; display: flex; align-items: center; gap: 13px; }
 .success-alert > img { width: 25px; height: 25px; }
 .success-alert div { display: flex; flex-direction: column; gap: 8px; }

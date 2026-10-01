@@ -5,7 +5,7 @@ import type { ApprovalItem, LeaveSettings } from "./types";
 import schoolBrand from "../assets/school-brand.webp";
 import closeIcon from "../assets/close.svg";
 import moreIcon from "../assets/more.svg";
-import documentIcon from "../assets/document.svg";
+import documentIcon from "../assets/document.png";
 import infoIcon from "../assets/info.svg";
 import workflowIcon from "../assets/workflow.svg";
 import checkIcon from "../assets/check-circle.svg";
@@ -137,7 +137,7 @@ function App() {
 
         <DetailCard icon={infoIcon} title="基本信息">
           <dl className="leave-fields">
-            {createLeaveFields(leaveSettings).map((field) => <div key={field.label}><dt>{field.label}</dt><dd>{field.value}</dd></div>)}
+            {createLeaveFields(leaveSettings).map((field) => <div key={field.label}><dt><span>{field.label}</span></dt><dd>{field.value}</dd></div>)}
           </dl>
         </DetailCard>
 

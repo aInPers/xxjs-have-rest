@@ -40,16 +40,15 @@ export function calculateLeaveDays(startDate: string, endDate: string): string {
  */
 export function createLeaveFields(settings: LeaveSettings): LeaveField[] {
   return [
-    { label: "请假人：", value: settings.applicant },
-    { label: "请假开始日期：", value: settings.startDate },
-    { label: "请假结束日期：", value: settings.endDate },
-    { label: "请假天数：", value: calculateLeaveDays(settings.startDate, settings.endDate) },
-    { label: "请假类型：", value: settings.leaveType },
-    { label: "请假总节数：", value: "未填写" },
-    { label: "开始节次：", value: settings.startPeriod },
-    { label: "结束节次：", value: settings.endPeriod },
-    { label: "是否住校：", value: settings.isBoarding ? "是" : "否" },
-    { label: "请假原因：", value: settings.reason || "未填写" },
+    { label: "请假开始日期: ", value: settings.startDate },
+    { label: "请假结束日期: ", value: settings.endDate },
+    { label: "请假天数: ", value: calculateLeaveDays(settings.startDate, settings.endDate) },
+    { label: "请假类型: ", value: settings.leaveType },
+    { label: "请假总节数: ", value: "未填写" },
+    { label: "开始节次: ", value: settings.startPeriod },
+    { label: "结束节次: ", value: settings.endPeriod },
+    { label: "请假当天是否在校: \n留宿", value: settings.isBoarding ? "是" : "否" },
+    { label: "请假原因: ", value: settings.reason || "未填写" },
   ];
 }
 
