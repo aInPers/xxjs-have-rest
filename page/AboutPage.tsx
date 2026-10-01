@@ -20,7 +20,7 @@ function AboutPage({ onBack }: AboutPageProps) {
       <section className="about-intro">
         <div className="about-mark" aria-hidden="true">请</div>
         <h2>请假系统</h2>
-        <p>版本 0.9.1</p>
+        <p>版本 1.0</p>
       </section>
       <section className="about-details" aria-label="软件信息">
         <div className="about-row"><span>开源协议</span><strong>MIT License</strong></div>
