@@ -1,4 +1,9 @@
 reference/
 node_modules/
 dist/
-src-tauri/
+
+# 防止侵权不公开校徽，源码不会携带校徽
+school/
+
+# 本机 Android release 签名密钥与密码，禁止提交
+/release-signing/

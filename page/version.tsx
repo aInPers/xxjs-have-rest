@@ -1,1 +1,0 @@
-export const leave_version = "1.0";

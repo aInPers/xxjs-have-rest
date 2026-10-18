@@ -1,0 +1,17 @@
+.about-page { min-height: 100vh; color: #191919; background: #f6f6f6; }
+.about-header { height: 64px; padding: 0 15px; border-bottom: 1px solid #dedede; background: #ededed; display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; }
+.about-header h1 { margin: 0; font-size: 18px; font-weight: 600; text-align: center; }
+.about-header button { height: 42px; border: 0; color: #171717; background: transparent; font-family: Arial, sans-serif; font-size: 39px; font-weight: 200; line-height: 28px; text-align: left; }
+.about-intro { padding: 45px 20px 36px; text-align: center; }
+.about-mark { width: 78px; height: 78px; margin: 0 auto 17px; border-radius: 18px; color: #fff; background: #1677ff; display: grid; place-items: center; font-size: 34px; font-weight: 700; box-shadow: 0 7px 14px rgba(22, 119, 255, .22); }
+.about-intro h2 { margin: 0 0 7px; font-size: 21px; }
+.about-intro p { margin: 0; color: #858585; font-size: 14px; }
+.about-details { background: #fff; }
+.about-row { min-height: 56px; margin-left: 16px; padding: 0 16px 0 0; border-bottom: 1px solid #ededed; color: #202020; display: flex; align-items: center; justify-content: space-between; gap: 15px; font-size: 16px; text-decoration: none; }
+.about-row:last-child { border-bottom: 0; }
+.about-row strong { color: #777; font-size: 14px; font-weight: 400; }
+.source-code { align-items: flex-start; padding-top: 14px; padding-bottom: 14px; }
+.source-code code { max-width: 72%; padding: 5px 7px; border-radius: 4px; overflow-wrap: anywhere; color: #2563a8; background: #eef5ff; font-family: Consolas, "Courier New", monospace; font-size: 12px; line-height: 1.4; text-align: right; }
+.free-notice { margin: 23px 16px; padding: 17px 18px; border: 1px solid #ffc9c4; border-radius: 9px; color: #9d3028; background: #fff1f0; }
+.free-notice strong { font-size: 16px; }
+.free-notice p { margin: 9px 0 0; font-size: 14px; line-height: 1.6; }
