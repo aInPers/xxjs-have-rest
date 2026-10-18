@@ -97,45 +97,35 @@ function App() {
     if (!isTauri()) return;
     let mounted = true;
     let unregister: (() => Promise<void>) | undefined;
-    window.addEventListener("android-back", handleSystemBack);
-    void onBackButtonPress(handleSystemBack).then((listener) => {
+    void onBackButtonPress(() => {
+      if (activePageRef.current !== "wechat") {
+        navigateTo("wechat");
+        return;
+      }
+      const now = Date.now();
+      if (now - lastBackPressRef.current <= 2_000) {
+        lastBackPressRef.current = 0;
+        setShowExitPrompt(false);
+        void exit().catch((error) => console.error("退出应用失败", error));
+        return;
+      }
+      lastBackPressRef.current = now;
+      setShowExitPrompt(true);
+      window.clearTimeout(exitPromptTimerRef.current);
+      exitPromptTimerRef.current = window.setTimeout(() => {
+        lastBackPressRef.current = 0;
+        setShowExitPrompt(false);
+      }, 2_000);
+    }).then((listener) => {
       if (mounted) unregister = () => listener.unregister();
       else void listener.unregister();
     }).catch((error) => console.error("注册系统返回键失败", error));
     return () => {
       mounted = false;
-      window.removeEventListener("android-back", handleSystemBack);
       window.clearTimeout(exitPromptTimerRef.current);
       void unregister?.();
     };
   }, []);
-
-  /** Handles back events from the Tauri plugin and the Android activity. */
-  function handleSystemBack() {
-    if (activePageRef.current !== "wechat") {
-      navigateTo("wechat");
-      return;
-    }
-    handleRootBack();
-  }
-
-  /** Shows the exit prompt and requires another press within two seconds. */
-  function handleRootBack() {
-    const now = Date.now();
-    if (now - lastBackPressRef.current <= 2_000) {
-      lastBackPressRef.current = 0;
-      setShowExitPrompt(false);
-      void exit().catch((error) => console.error("退出应用失败", error));
-      return;
-    }
-    lastBackPressRef.current = now;
-    setShowExitPrompt(true);
-    window.clearTimeout(exitPromptTimerRef.current);
-    exitPromptTimerRef.current = window.setTimeout(() => {
-      lastBackPressRef.current = 0;
-      setShowExitPrompt(false);
-    }, 2_000);
-  }
 
   /** Changes pages and clears any pending root-page exit gesture. */
   function navigateTo(page: "leave" | "wechat" | "settings" | "about") {

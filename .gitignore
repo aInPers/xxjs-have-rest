@@ -7,3 +7,6 @@ school/
 
 # 本机 Android release 签名密钥与密码，禁止提交
 /release-signing/
+
+#日志
+*.log
