@@ -1,4 +1,4 @@
-# 信职请假系统
+# 请假系统客户端
 
 基于 React、Vite 和 Tauri 2 的请假信息展示应用，支持 Windows 桌面端，并提供 Android、iOS 构建配置。请假设置保存在设备本地的 IndexedDB 中。
 
